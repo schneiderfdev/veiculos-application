@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Venda de Veículos</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<h1>Cadastro de Veículos</h1>
+
+<div class="form">
+    <input type="text" id="modelo" placeholder="Modelo">
+    <input type="text" id="marca" placeholder="Marca">
+    <input type="number" id="ano" placeholder="Ano">
+    <input type="number" id="preco" placeholder="Preço">
+    <input type="number" id="estoque" placeholder="Estoque">
+    <button onclick="salvar()">Salvar</button>
+</div>
+
+<h2>Lista de Veículos</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Modelo</th>
+        <th>Marca</th>
+        <th>Ano</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody id="tabela-veiculos"></tbody>
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
