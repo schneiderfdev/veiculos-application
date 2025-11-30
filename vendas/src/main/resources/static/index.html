@@ -1,40 +1,171 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <title>Venda de Veículos</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>AutoPrime Motors</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<h1>Cadastro de Veículos</h1>
+<header>
+    <div class="logo">AutoPrime <span>Motors</span></div>
+    <nav>
+        <a onclick="mudarTela('inicio')">Início</a>
+        <a onclick="mudarTela('estoque')">Estoque</a>
+        <a onclick="mudarTela('cadastro')">Cadastrar Veículo</a>
+        <a onclick="mudarTela('admin')">Admin</a>
+    </nav>
+</header>
 
-<div class="form">
-    <input type="text" id="modelo" placeholder="Modelo">
-    <input type="text" id="marca" placeholder="Marca">
-    <input type="number" id="ano" placeholder="Ano">
-    <input type="number" id="preco" placeholder="Preço">
-    <input type="number" id="estoque" placeholder="Estoque">
-    <button onclick="salvar()">Salvar</button>
-</div>
+<!-- INÍCIO -->
+<section id="inicio" class="tela ativa">
+    <h2>🔥 Destaques da Semana</h2>
 
-<h2>Lista de Veículos</h2>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Modelo</th>
-        <th>Marca</th>
-        <th>Ano</th>
-        <th>Preço</th>
-        <th>Estoque</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody id="tabela-veiculos"></tbody>
-</table>
+    <div class="grid" id="destaques">
+
+        <!-- 9 DESTAQUES -->
+        <div class="card"><img src="https://www.gtocarspecialists.com/pub/estoque/porsche-911-turbo-9912_251125_1638.jpg"><div class="info"><h3>Porsche 911 Carrera</h3><p>2023 • 3.200 km</p><strong>R$ 1.050.000</strong></div></div>
+        <div class="card"><img src="https://www.gtocarspecialists.com/pub/estoque/bmw-m4-cs-g82_250417_3946.jpg"><div class="info"><h3>BMW M4 Competition</h3><p>2022 • 8.000 km</p><strong>R$ 780.000</strong></div></div>
+        <div class="card"><img src="https://www.gtocarspecialists.com/pub/estoque/lamborghini-gallardo-lp5502-valentino-balboni_250904_3251.jpg"><div class="info"><h3>Lamborghini Gallardo</h3><p>2021 • 5.400 km</p><strong>R$ 2.300.000</strong></div></div>
+        <div class="card"><img src="data:image/jpeg;base64,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"><div class="info"><h3>Mclaren P1</h3><p>2013 • 9.000 km</p><strong>R$ 20.000.000</strong></div></div>
+        <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWuzQbGvuuZOAecfxtp1f9cVTnLOILPdlr5w&s"><div class="info"><h3>Mercedes AMG GT</h3><p>2021 • 11.200 km</p><strong>R$ 1.250.000</strong></div></div>
+        <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBLP_NvGKSdYTQlhlrbJD2HnURPoXUA1IP8Q&s"><div class="info"><h3>Porsche Taycan</h3><p>2023 • 2.100 km</p><strong>R$ 920.000</strong></div></div>
+        <div class="card"><img src="https://www.gtocarspecialists.com/pub/estoque/bmw-m2-competition-f87_251014_2136.jpg"><div class="info"><h3>BMW m2</h3><p>2022 • 7.900 km</p><strong>R$ 890.000</strong></div></div>
+        <div class="card"><img src="https://www.gtocarspecialists.com/pub/estoque/ferrari-488-pista_241021_0824.jpg"><div class="info"><h3>Ferrari 488 Pista</h3><p>2021 • 14.000 km</p><strong>R$ 720.000</strong></div></div>
+        <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFhoICpSly5Lwtl0TZacLMeAflr5vmKYEzgw&s"><div class="info"><h3>Porsche Panamera</h3><p>2022 • 9.300 km</p><strong>R$ 780.000</strong></div></div>
+
+    </div>
+</section>
+
+<!-- ESTOQUE -->
+<section id="estoque" class="tela">
+    <h2>🚗 Nosso Estoque</h2>
+
+    <div class="grid" id="listaEstoque">
+
+        <!-- ===== PORSCHE CLÁSSICOS ===== -->
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI6GVIBUuV-UTQ6nQRO6bhEqggumAGnMRs-g&s">
+            <div class="info">
+                <h3>Porsche 911 1975</h3>
+                <p>1975 • 58.000 km</p>
+                <strong>R$ 950.000</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://www.gtocarspecialists.com/pub/estoque/porsche-911-turbo-s-964-flachbau_250217_1809.jpg">
+            <div class="info">
+                <h3>Porsche 356</h3>
+                <p>1964 • 72.000 km</p>
+                <strong>R$ 1.250.000</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://www.gtocarspecialists.com/pub/estoque/porsche-cayman-r_251002_4817.jpg">
+            <div class="info">
+                <h3>Porsche 930 Turbo</h3>
+                <p>1986 • 61.000 km</p>
+                <strong>R$ 1.480.000</strong>
+            </div>
+        </div>
+
+        <!-- ===== FERRARI CLÁSSICAS ===== -->
+        <div class="card">
+            <img src="https://www.gtocarspecialists.com/pub/estoque/ferrari-599-gto_241028_4518.jpg">
+            <div class="info">
+                <h3>Ferrari 308 GTS</h3>
+                <p>1982 • 54.000 km</p>
+                <strong>R$ 2.100.000</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMiBnHhAjuev9yfjj_jHkiU345NrTUoa-52w&s">
+            <div class="info">
+                <h3>Ferrari Testarossa</h3>
+                <p>1989 • 46.000 km</p>
+                <strong>R$ 3.400.000</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://s2-autoesporte.glbimg.com/bJzM8q1HFgYZA61OxG7NmiDsKOw=/0x0:1920x1244/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/B/k/9exR2VQJCHzdaxWxGJGQ/ferrari-toto-1.jpg">
+            <div class="info">
+                <h3>Ferrari F40</h3>
+                <p>1991 • 29.000 km</p>
+                <strong>R$ 8.900.000</strong>
+            </div>
+        </div>
+
+        <!-- ===== MERCEDES CLÁSSICAS ===== -->
+        <div class="card">
+            <img src="https://www.gtocarspecialists.com/pub/estoque/mercedesbenz-a200_251104_2815.jpg">
+            <div class="info">
+                <h3>Mercedes 300 SL Gullwing</h3>
+                <p>2020 • 81.000 km</p>
+                <strong>R$ 9.500.000</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://www.gtocarspecialists.com/pub/estoque/mercedesmaybach-s680-brabus_251022_1910.jpg">
+            <div class="info">
+                <h3>Mercedes 280 SL</h3>
+                <p>2022 • 67.000 km</p>
+                <strong>R$ 890.000</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyv_Zfsh4xijU2IgoiQPjhDHJ_xgkzj48bRg&s">
+            <div class="info">
+                <h3>Mercedes 190E Evo II</h3>
+                <p>2024 • 48.000 km</p>
+                <strong>R$ 3.200.000</strong>
+            </div>
+        </div>
+
+        <!-- Aqui você pode copiar os mesmos cards se quiser -->
+    </div>
+</section>
+
+<!-- CADASTRO -->
+<section id="cadastro" class="tela">
+    <h2>➕ Cadastrar Veículo</h2>
+    <form>
+        <input placeholder="Modelo">
+        <input placeholder="Marca">
+        <input placeholder="Ano">
+        <input placeholder="Preço">
+        <button type="button">Salvar</button>
+    </form>
+</section>
+
+<!-- ADMIN -->
+<section id="admin" class="tela">
+    <h2>⚙️ Área Administrativa</h2>
+    <table>
+        <tr>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Ano</th>
+            <th>Preço</th>
+            <th>Ação</th>
+        </tr>
+        <tbody id="tabela">
+        <tr>
+            <td>Porsche 911 Carrera</td>
+            <td>Porsche</td>
+            <td>2023</td>
+            <td>R$ 1.050.000</td>
+            <td><button onclick="excluir(this)">Excluir</button></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
 
 <script src="script.js"></script>
-
 </body>
 </html>

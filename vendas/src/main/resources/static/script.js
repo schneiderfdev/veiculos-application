@@ -1,55 +1,45 @@
-const API_URL = "http://localhost:8080/veiculos";
-
-function listar() {
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(dados => {
-            const tabela = document.getElementById("tabela-veiculos");
-            tabela.innerHTML = "";
-            dados.forEach(v => {
-                tabela.innerHTML += `
-                    <tr>
-                        <td>${v.id}</td>
-                        <td>${v.modelo}</td>
-                        <td>${v.marca}</td>
-                        <td>${v.ano}</td>
-                        <td>R$ ${v.preco}</td>
-                        <td>${v.estoque}</td>
-                        <td><button onclick="excluir(${v.id})">Excluir</button></td>
-                    </tr>
-                `;
-            });
-        });
+function mudarTela(tela) {
+  document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+  document.getElementById(tela).classList.add('ativa');
 }
 
-function salvar() {
-    const veiculo = {
-        modelo: document.getElementById("modelo").value,
-        marca: document.getElementById("marca").value,
-        ano: Number(document.getElementById("ano").value),
-        preco: Number(document.getElementById("preco").value),
-        estoque: Number(document.getElementById("estoque").value)
-    };
-    fetch(API_URL, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(veiculo)
-    })
-    .then(res => res.ok ? listar() : console.error("Erro ao salvar"))
-    .then(() => limparCampos());
+function excluir(botao) {
+  botao.closest("tr").remove();
 }
 
-function excluir(id) {
-    fetch(`${API_URL}/${id}`, { method: "DELETE" })
-        .then(res => res.ok ? listar() : console.error("Erro ao excluir"));
-}
+// ✅ CAPTURA O FORMULÁRIO DE CADASTRO
+const botaoSalvar = document.querySelector("#cadastro button");
 
-function limparCampos() {
-    document.getElementById("modelo").value = "";
-    document.getElementById("marca").value = "";
-    document.getElementById("ano").value = "";
-    document.getElementById("preco").value = "";
-    document.getElementById("estoque").value = "";
-}
+botaoSalvar.addEventListener("click", () => {
+  const inputs = document.querySelectorAll("#cadastro input");
 
-window.onload = listar;
+  const modelo = inputs[0].value;
+  const marca  = inputs[1].value;
+  const ano    = inputs[2].value;
+  const preco  = inputs[3].value;
+
+  // ✅ VALIDAÇÃO SIMPLES
+  if (!modelo || !marca || !ano || !preco) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  // ✅ ADICIONA NA TABELA ADMIN
+  const tabela = document.getElementById("tabela");
+
+  tabela.innerHTML += `
+    <tr>
+      <td>${modelo}</td>
+      <td>${marca}</td>
+      <td>${ano}</td>
+      <td>R$ ${preco}</td>
+      <td><button onclick="excluir(this)">Excluir</button></td>
+    </tr>
+  `;
+
+  // ✅ LIMPA OS CAMPOS
+  inputs.forEach(input => input.value = "");
+
+  // ✅ MUDA AUTOMATICAMENTE PARA A TELA ADMIN
+  mudarTela("admin");
+});
