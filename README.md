@@ -112,7 +112,8 @@ http://localhost:8080
 
 > Em breve prints do sistema.
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b3fd8320-6b96-4bf3-9341-decd68eb611b" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2d698b9a-b04f-4ce9-8363-04e12a71d17a" />
+
 
 
 🎯 Objetivo do Projeto
